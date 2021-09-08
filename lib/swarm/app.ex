@@ -8,11 +8,11 @@ defmodule Swarm.App do
 
   def init(_) do
     children = [
-      supervisor(Task.Supervisor, [[name: Swarm.TaskSupervisor]]),
-      worker(Swarm.Registry, []),
-      worker(Swarm.Tracker, [])
+      %{id: Task.Supervisor, start: {Task.Supervisor, :start_link, [[name: Swarm.TaskSupervisor]]}, type: :supervisor},
+      %{id: Swarm.Registry, start: {Swarm.Registry, :start_link, []}},
+      %{id: Swarm.Tracker, start: {Swarm.Tracker, :start_link, []}}
     ]
 
-    supervise(children, strategy: :one_for_one)
+    Supervisor.init(children, strategy: :one_for_one)
   end
 end

@@ -16,7 +16,7 @@ defmodule Swarm.Mixfile do
     [
       app: :swarm,
       version: "3.4.0",
-      elixir: "~> 1.3",
+      elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
@@ -40,12 +40,12 @@ defmodule Swarm.Mixfile do
 
   defp deps do
     [
-      {:ex_doc, "~> 0.13", only: :dev},
-      {:dialyxir, "~> 0.3", only: :dev},
-      {:benchee, "~> 0.4", only: :dev},
-      {:porcelain, "~> 2.0", only: [:dev, :test]},
-      {:libring, "~> 1.0"},
-      {:gen_state_machine, "~> 2.0"}
+      {:ex_doc, "~> 0.25.2", only: :dev},
+      {:dialyxir, "~> 1.1.0", only: :dev},
+      {:benchee, "~> 1.0.1", only: :dev},
+      {:porcelain, "~> 2.0.3", only: [:dev, :test]},
+      {:libring, "~> 1.5.0"},
+      {:gen_state_machine, "~> 3.0.0"}
     ]
   end
 
