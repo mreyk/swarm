@@ -4,7 +4,7 @@ defmodule Swarm.IntervalTreeClock do
   the implementation in Erlang written by Paulo Sergio Almeida <psa@di.uminho.pt>
   found [here](https://github.com/ricardobcl/Interval-Tree-Clocks/blob/master/erlang/itc.erl).
   """
-  use Bitwise
+  import Bitwise
   import Kernel, except: [max: 2, min: 2]
   @compile {:inline, [min: 2, max: 2, drop: 2, lift: 2, base: 1, height: 1]}
 
@@ -235,15 +235,15 @@ defmodule Swarm.IntervalTreeClock do
   def str({i, e}),
     do: List.to_string(List.flatten([List.flatten(stri(i)), List.flatten(stre(e))]))
 
-  defp stri(0), do: '0'
-  defp stri(1), do: ''
-  defp stri({0, i}), do: 'R' ++ stri(i)
-  defp stri({i, 0}), do: 'L' ++ stri(i)
-  defp stri({l, r}), do: ['(L' ++ stri(l), '+', 'R' ++ stri(r), ')']
+  defp stri(0), do: ~c"0"
+  defp stri(1), do: ~c""
+  defp stri({0, i}), do: ~c"R" ++ stri(i)
+  defp stri({i, 0}), do: ~c"L" ++ stri(i)
+  defp stri({l, r}), do: [~c"(L" ++ stri(l), ~c"+", ~c"R" ++ stri(r), ~c")"]
 
-  defp stre({n, l, 0}), do: [stre(n), 'L', stre(l)]
-  defp stre({n, 0, r}), do: [stre(n), 'R', stre(r)]
-  defp stre({n, l, r}), do: [stre(n), '(L', stre(l), '+R', stre(r), ')']
+  defp stre({n, l, 0}), do: [stre(n), ~c"L", stre(l)]
+  defp stre({n, 0, r}), do: [stre(n), ~c"R", stre(r)]
+  defp stre({n, l, r}), do: [stre(n), ~"(L", stre(l), ~c"+R", stre(r), ~c")"]
   defp stre(n) when n > 0, do: :erlang.integer_to_list(n)
-  defp stre(_), do: ''
+  defp stre(_), do: ~c""
 end

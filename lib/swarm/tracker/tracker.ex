@@ -127,7 +127,7 @@ defmodule Swarm.Tracker do
     {current_state, _arity} = __CALLER__.function
 
     quote do
-      Logger.warn(Swarm.Logger.format("[tracker:#{unquote(current_state)}] #{unquote(msg)}"))
+      Logger.warning(Swarm.Logger.format("[tracker:#{unquote(current_state)}] #{unquote(msg)}"))
     end
   end
 
@@ -826,7 +826,7 @@ defmodule Swarm.Tracker do
       end
     catch
       kind, err ->
-        error(Exception.format(kind, err, System.stacktrace()))
+        error(Exception.format(kind, err, __STACKTRACE__))
         :keep_state_and_data
     end
   end
@@ -1312,7 +1312,7 @@ defmodule Swarm.Tracker do
               end
             catch
               kind, reason ->
-                warn(Exception.format(kind, reason, System.stacktrace()))
+                warn(Exception.format(kind, reason, __STACKTRACE__))
                 reply(from, {:error, reason})
                 :keep_state_and_data
             end
@@ -1406,7 +1406,7 @@ defmodule Swarm.Tracker do
         end
 
       kind, err ->
-        error(Exception.format(kind, err, System.stacktrace()))
+        error(Exception.format(kind, err, __STACKTRACE__))
         warn("failed to start #{inspect(name)} on #{remote_node}: #{inspect(err)}")
         reply(from, {:error, err})
     end
