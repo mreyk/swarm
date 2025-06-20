@@ -243,7 +243,7 @@ defmodule Swarm.IntervalTreeClock do
 
   defp stre({n, l, 0}), do: [stre(n), ~c"L", stre(l)]
   defp stre({n, 0, r}), do: [stre(n), ~c"R", stre(r)]
-  defp stre({n, l, r}), do: [stre(n), ~"(L", stre(l), ~c"+R", stre(r), ~c")"]
+  defp stre({n, l, r}), do: [stre(n), ~c"(L", stre(l), ~c"+R", stre(r), ~c")"]
   defp stre(n) when n > 0, do: :erlang.integer_to_list(n)
   defp stre(_), do: ~c""
 end
