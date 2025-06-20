@@ -4,7 +4,6 @@ defmodule Swarm.IntervalTreeClock do
   the implementation in Erlang written by Paulo Sergio Almeida <psa@di.uminho.pt>
   found [here](https://github.com/ricardobcl/Interval-Tree-Clocks/blob/master/erlang/itc.erl).
   """
-  import Bitwise
   import Kernel, except: [max: 2, min: 2]
   @compile {:inline, [min: 2, max: 2, drop: 2, lift: 2, base: 1, height: 1]}
 
