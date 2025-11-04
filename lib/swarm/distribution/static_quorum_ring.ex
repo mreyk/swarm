@@ -62,19 +62,23 @@ defmodule Swarm.Distribution.StaticQuorumRing do
   end
 
   def add_node(quorum, node) do
-    %StaticQuorumRing{quorum | ring: HashRing.add_node(quorum.ring, node)}
+    %StaticQuorumRing{} = quorum
+    %{quorum | ring: HashRing.add_node(quorum.ring, node)}
   end
 
   def add_node(quorum, node, weight) do
-    %StaticQuorumRing{quorum | ring: HashRing.add_node(quorum.ring, node, weight)}
+    %StaticQuorumRing{} = quorum
+    %{quorum | ring: HashRing.add_node(quorum.ring, node, weight)}
   end
 
   def add_nodes(quorum, nodes) do
-    %StaticQuorumRing{quorum | ring: HashRing.add_nodes(quorum.ring, nodes)}
+    %StaticQuorumRing{} = quorum
+    %{quorum | ring: HashRing.add_nodes(quorum.ring, nodes)}
   end
 
   def remove_node(quorum, node) do
-    %StaticQuorumRing{quorum | ring: HashRing.remove_node(quorum.ring, node)}
+    %StaticQuorumRing{} = quorum
+    %{quorum | ring: HashRing.remove_node(quorum.ring, node)}
   end
 
   @doc """
